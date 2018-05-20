@@ -45,5 +45,8 @@
 class nextcloud {
 
   include nextcloud::database
+  include nextcloud::php
+  Class['nextcloud::database']
+  -> Class['nextcloud::php']
 
 }
