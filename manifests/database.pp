@@ -1,4 +1,17 @@
 class nextcloud::database {
-  #MariaDB client
-  # Nextcloud DB + USER + PASSWORD
+
+  class {'::mysql::server':
+    package_name     => 'mariadb-server',
+    service_name     => 'mysql',
+    root_password    => 'rootpassword',
+    override_options => {
+      mysqld => {
+        'log-error' => '/var/log/mysql/mariadb.log',
+        'pid-file'  => '/var/run/mysqld/mysqld.pid',
+      },
+      mysqld_safe => {
+        'log-error' => '/var/log/mysql/mariadb.log',
+      },
+    }
+  }
 }
