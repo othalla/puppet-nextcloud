@@ -14,4 +14,10 @@ class nextcloud::database {
       },
     }
   }
+  mysql::db { 'nextcloud':
+    user     => 'nextcloud',
+    password => 'nextcloud',
+    host     => 'localhost',
+    grant    => ['ALL'],
+  }
 }
