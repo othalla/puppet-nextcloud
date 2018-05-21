@@ -46,7 +46,9 @@ class nextcloud {
 
   include nextcloud::database
   include nextcloud::php
+  include nextcloud::install
   Class['nextcloud::database']
   -> Class['nextcloud::php']
+  -> Class['nextcloud::install']
 
 }
