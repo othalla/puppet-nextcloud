@@ -2,7 +2,7 @@ class nextcloud::database {
 
   class {'::mysql::server':
     package_name     => 'mariadb-server',
-    service_name     => 'mysql',
+    service_name     => 'mariadb',
     root_password    => 'rootpassword',
     override_options => {
       mysqld => {
