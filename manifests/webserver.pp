@@ -3,7 +3,7 @@ class nextcloud::webserver {
   class { 'nginx':
     manage_repo => false,
   }
-  -> nginx::resource::server { 'nextcloud_server':
+  nginx::resource::server { 'nextcloud_server':
     ensure      => present,
     server_name => ['nextcloud', 'nextcloud.fqdn.local'],
     listen_port => 80,
