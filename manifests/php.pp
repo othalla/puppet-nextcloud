@@ -1,13 +1,5 @@
 class nextcloud::php {
 
-  class { 'phpfpm':
-    process_max  => 20,
-    package_name => 'php7.0-fpm',
-    poold_purge => true,
-  }
-  -> phpfpm::pool { 'nextcloud':
-    listen => '/run/php/php7.0-fpm.sock',
-  }
   $php_extensions = [
     'php7.0-mbstring',
     'php7.0-xmlrpc',
@@ -27,7 +19,15 @@ class nextcloud::php {
     'php7.0-curl',
     'php7.0-zip'
   ]
-  package { $php_extensions:
+  class { 'phpfpm':
+    process_max  => 20,
+    package_name => 'php7.0-fpm',
+    poold_purge => true,
+  }
+  -> phpfpm::pool { 'nextcloud':
+    listen => '/run/php/php7.0-fpm.sock',
+  }
+  -> package { $php_extensions:
     ensure => present,
   }
 }
