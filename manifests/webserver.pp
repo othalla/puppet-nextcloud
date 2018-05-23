@@ -4,11 +4,11 @@ class nextcloud::webserver {
     manage_repo    => false,
   }
   nginx::resource::server { 'nextcloud_server':
-    ensure      => present,
-    server_name => ['nextcloud', 'nextcloud.int.othalland.xyz'],
-    listen_port => 80,
-    ssl_redirect => true,
-    ssl_redirect_port => 443,
+    ensure               => present,
+    server_name          => ['nextcloud', 'nextcloud.int.othalland.xyz'],
+    listen_port          => 80,
+    ssl_redirect         => true,
+    ssl_redirect_port    => 443,
     use_default_location => false,
   }
   nginx::resource::server { 'nextcloud_server_https':
@@ -23,7 +23,7 @@ class nextcloud::webserver {
     client_max_body_size => '512M',
     use_default_location => false,
     add_header           => {
-      'X-Content-Type-Options' => 'nosniff',
+      'X-Content-Type-Options'            => 'nosniff',
       'X-XSS-Protection'                  => '1; mode=block',
       'X-Robots-Tag'                      => 'none',
       'X-Download-Options'                => 'noopen',
@@ -38,20 +38,7 @@ class nextcloud::webserver {
       'gzip_types'      => 'plication/atom+xml application/javascript application/json application/ld+json application/manifest+json application/rss+xml application/vnd.geo+json application/vnd.ms-fontobject application/x-font-ttf application/x-web-app-manifest+json application/xhtml+xml application/xml font/opentype image/bmp image/svg+xml image/x-icon text/cache-manifest text/css text/plain text/vcard text/vnd.rim.location.xloc text/vtt text/x-component text/x-cross-domain-policy',
     },
   }
-  nginx::resource::location { "robot":
-    ensure              => present,
-    ssl                 => true,
-    ssl_only            => true,
-    index_files         => [],
-    server              => "nextcloud_server_https",
-    location            => '= /robots.txt',
-    location_allow      => ['all'],
-    location_cfg_append => {
-      'log_not_found' => 'off',
-      'access_log'    => 'off',
-    }
-  }
-  -> nginx::resource::location { "root":
+  nginx::resource::location { "root":
     ensure              => present,
     ssl                 => true,
     ssl_only            => true,
