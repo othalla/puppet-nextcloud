@@ -1,7 +1,6 @@
 class nextcloud::webserver {
 
   class { 'nginx':
-    #service_manage => false,
     manage_repo    => false,
   }
   nginx::resource::server { 'nextcloud_server':
@@ -137,8 +136,8 @@ class nextcloud::webserver {
     location_cfg_append => { 'access_log' => 'off' },
   }
   nginx::resource::upstream { 'php-handler':
-	  members => [
-		  'unix:/run/php/php7.0-fpm.sock',
-	  ],
+    members => [
+      'unix:/run/php/php7.0-fpm.sock',
+    ],
   }
 }
