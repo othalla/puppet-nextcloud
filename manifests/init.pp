@@ -43,21 +43,22 @@
 # Copyright 2018 Your name here, unless otherwise noted.
 #
 class nextcloud (
-  $install_dir     = '/var/www/html/nextcloud',
-  $data_directory  = '/www/htdocs/nextcloud/data',
-  $db_type         = 'mysql',
-  $db_name         = 'nextcloud',
-  $db_user         = 'nextcloud',
-  $db_password     = 'nextcloud',
-  $db_host         = 'localhost',
-  $db_table_prefix = undef,
-  $admin_user      = 'root',
-  $admin_password  = 'password',
-  $http_port       = 80,
-  $https_port      = 443,
-  $ssl             = true,
-  $ssl_key_file    = '/etc/nginx/ssl/cert.key',
-  $ssl_cert_file   = '/etc/nginx/ssl/cert.crt',
+  $install_dir                = '/var/www/html/nextcloud',
+  $data_directory             = '/www/htdocs/nextcloud/data',
+  $db_type                    = 'mysql',
+  $db_name                    = 'nextcloud',
+  $db_user                    = 'nextcloud',
+  $db_password                = 'nextcloud',
+  $db_host                    = 'localhost',
+  $db_table_prefix            = undef,
+  $admin_user                 = 'root',
+  $admin_password             = 'password',
+  Array[String] $server_names = ['localhost'],
+  $http_port                  = 80,
+  $https_port                 = 443,
+  $ssl                        = true,
+  $ssl_key_file               = '/etc/nginx/ssl/cert.key',
+  $ssl_cert_file              = '/etc/nginx/ssl/cert.crt',
 ) {
 
   include nextcloud::database

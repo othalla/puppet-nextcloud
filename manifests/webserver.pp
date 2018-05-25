@@ -1,7 +1,8 @@
 class nextcloud::webserver (
-  $ssl        = $nextcloud::ssl,
-  $http_port  = $nextcloud::http_port,
-  $https_port = $nextcloud::https_port,
+  $ssl          = $nextcloud::ssl,
+  $http_port    = $nextcloud::http_port,
+  $https_port   = $nextcloud::https_port,
+  $server_names = $nextcloud::server_names,
 ) {
   if $ssl == true {
     $port = $https_port
@@ -15,7 +16,7 @@ class nextcloud::webserver (
   if $ssl {
     nginx::resource::server { 'nextcloud_server_redirect':
       ensure               => present,
-      server_name          => ['nextcloud', 'nextcloud.int.othalland.xyz'],
+      server_name          => $server_names,
       listen_port          => $http_port,
       ssl_redirect         => true,
       ssl_redirect_port    => $https_port,
