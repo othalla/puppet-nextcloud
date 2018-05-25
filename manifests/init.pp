@@ -79,7 +79,7 @@ class nextcloud (
     -> Class['nextcloud::webserver']
     -> Class['nextcloud::config']
   } else {
-    -> Class['nextcloud::php']
+    Class['nextcloud::php']
     -> Class['nextcloud::install']
     -> Class['nextcloud::webserver']
     -> Class['nextcloud::config']
