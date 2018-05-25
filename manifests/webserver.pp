@@ -13,7 +13,7 @@ class nextcloud::webserver (
     manage_repo    => false,
   }
   if $ssl {
-    nginx::resource::server { 'nextcloud_server':
+    nginx::resource::server { 'nextcloud_server_redirect':
       ensure               => present,
       server_name          => ['nextcloud', 'nextcloud.int.othalland.xyz'],
       listen_port          => $http_port,
@@ -54,7 +54,7 @@ class nextcloud::webserver (
     ssl           => true,
     ssl_only      => true,
     index_files   => [],
-    server        => "nextcloud_server_https",
+    server        => "nextcloud_server_main",
     location      => '/',
     rewrite_rules => ['^ /index.php$uri'],
     priority      => 401,
@@ -64,7 +64,7 @@ class nextcloud::webserver (
     ssl                 => true,
     ssl_only            => true,
     index_files         => [],
-    server              => "nextcloud_server_https",
+    server              => "nextcloud_server_main",
     location            => '~ ^/(?:build|tests|config|lib|3rdparty|templates|data)/',
     location_deny       => ['all'],
     priority            => 402,
@@ -74,7 +74,7 @@ class nextcloud::webserver (
     ssl                 => true,
     ssl_only            => true,
     index_files         => [],
-    server              => "nextcloud_server_https",
+    server              => "nextcloud_server_main",
     location            => '~ ^/(?:\.|autotest|occ|issue|indie|db_|console)',
     location_deny       => ['all'],
     priority            => 403,
@@ -84,7 +84,7 @@ class nextcloud::webserver (
     ssl                 => true,
     ssl_only            => true,
     index_files         => [],
-    server              => "nextcloud_server_https",
+    server              => "nextcloud_server_main",
     location            => '~ ^/(?:index|remote|public|cron|core/ajax/update|status|ocs/v[12]|updater/.+|ocs-provider/.+)\.php(?:$|/)',
     raw_append          => [
       'fastcgi_split_path_info ^(.+\.php)(/.*)$;',
@@ -105,7 +105,7 @@ class nextcloud::webserver (
     ssl         => true,
     ssl_only    => true,
     index_files => ['index.php'],
-    server      => "nextcloud_server_https",
+    server      => "nextcloud_server_main",
     location    => '~ ^/(?:updater|ocs-provider)(?:$|/)',
     try_files   => ['$uri/ =404'],
     priority    => 405,
@@ -115,7 +115,7 @@ class nextcloud::webserver (
     ssl                 => true,
     ssl_only            => true,
     index_files         => ['index.php'],
-    server              => "nextcloud_server_https",
+    server              => "nextcloud_server_main",
     location            => '~ \.(?:css|js|woff|svg|gif)$',
     try_files           => ['$uri', '/index.php$uri$is_args$args'],
     add_header          => {
@@ -134,7 +134,7 @@ class nextcloud::webserver (
     ssl                 => true,
     ssl_only            => true,
     index_files         => ['index.php'],
-    server              => "nextcloud_server_https",
+    server              => "nextcloud_server_main",
     location            => '~ \.(?:png|html|ttf|ico|jpg|jpeg)$',
     try_files           => ['$uri', '/index.php$uri$is_args$args'],
     location_cfg_append => { 'access_log' => 'off' },
