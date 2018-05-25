@@ -60,8 +60,6 @@ class nextcloud (
   $php_version                = '7.0'
 ) {
 
-  if !
-
   if $ssl and !($ssl_cert_file and $ssl_key_file) {
     fail("You must provide certificate file and key file for SSL config.")
   }
