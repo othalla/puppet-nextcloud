@@ -42,7 +42,18 @@
 #
 # Copyright 2018 Your name here, unless otherwise noted.
 #
-class nextcloud {
+class nextcloud (
+  $install_dir     = '/var/www/html/nextcloud',
+  $data_directory  = '/www/htdocs/nextcloud/data',
+  $db_type         = 'mysql',
+  $db_name         = 'nextcloud',
+  $db_user         = 'nextcloud',
+  $db_password     = 'nextcloud',
+  $db_host         = 'localhost',
+  $db_table_prefix = undef,
+  $admin_user      = 'root',
+  $admin_password  = 'password',
+) {
 
   include nextcloud::database
   include nextcloud::php
