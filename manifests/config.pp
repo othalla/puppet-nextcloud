@@ -1,4 +1,4 @@
-class nextcloud::config.pp (
+class nextcloud::config (
   $install_dir     = $nextcloud::install_dir,
   $data_directory  = $nextcloud::db_user,
   $db_type         = $nextcloud::db_type,
