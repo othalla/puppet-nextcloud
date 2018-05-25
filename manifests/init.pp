@@ -66,13 +66,13 @@ class nextcloud (
     fail("You must provide certificate file and key file for SSL config.")
   }
 
-  contain nextcloud::php
-  contain nextcloud::install
-  contain nextcloud::webserver
-  include nextcloud::config
 
   if $db_manage {
     contain nextcloud::database
+    contain nextcloud::php
+    contain nextcloud::install
+    contain nextcloud::webserver
+    include nextcloud::config
 
     Class['nextcloud::database']
     -> Class['nextcloud::php']
@@ -80,6 +80,11 @@ class nextcloud (
     -> Class['nextcloud::webserver']
     -> Class['nextcloud::config']
   } else {
+    contain nextcloud::php
+    contain nextcloud::install
+    contain nextcloud::webserver
+    include nextcloud::config
+
     Class['nextcloud::php']
     -> Class['nextcloud::install']
     -> Class['nextcloud::webserver']
