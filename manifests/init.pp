@@ -53,8 +53,11 @@ class nextcloud (
   $db_table_prefix = undef,
   $admin_user      = 'root',
   $admin_password  = 'password',
-  $ssl_file_key    = '/etc/nginx/ssl/cert.key',
-  $ssl_file_cert   = '/etc/nginx/ssl/cert.crt',
+  $http_port       = 80,
+  $https_port      = 443,
+  $ssl             = true,
+  $ssl_key_file    = '/etc/nginx/ssl/cert.key',
+  $ssl_cert_file   = '/etc/nginx/ssl/cert.crt',
 ) {
 
   include nextcloud::database

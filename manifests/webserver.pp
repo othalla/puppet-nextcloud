@@ -1,23 +1,34 @@
-class nextcloud::webserver {
+class nextcloud::webserver (
+  $ssl        = $nextcloud::ssl,
+  $http_port  = $nextcloud::http_port,
+  $https_port = $nextcloud::https_port,
+) {
+  if $ssl == true {
+    $port = $https_port
+  } else {
+    $port = $http_port
+  }
 
   class { 'nginx':
     manage_repo    => false,
   }
-  nginx::resource::server { 'nextcloud_server':
-    ensure               => present,
-    server_name          => ['nextcloud', 'nextcloud.int.othalland.xyz'],
-    listen_port          => 80,
-    ssl_redirect         => true,
-    ssl_redirect_port    => 443,
-    use_default_location => false,
+  if $ssl {
+    nginx::resource::server { 'nextcloud_server':
+      ensure               => present,
+      server_name          => ['nextcloud', 'nextcloud.int.othalland.xyz'],
+      listen_port          => $http_port,
+      ssl_redirect         => true,
+      ssl_redirect_port    => $https_port,
+      use_default_location => false,
+    }
   }
-  nginx::resource::server { 'nextcloud_server_https':
+  nginx::resource::server { 'nextcloud_server_main':
     ensure               => present,
     server_name          => ['nextcloud', 'nextcloud.int.othalland.xyz'],
     ssl                  => true,
     ssl_cert             => '/tmp/server.crt',
     ssl_key              => '/tmp/server.key',
-    listen_port          => 443,
+    listen_port          => $port,
     http2                => true,
     www_root             => '/var/www/html/nextcloud',
     client_max_body_size => '512M',
