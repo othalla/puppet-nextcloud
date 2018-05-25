@@ -57,9 +57,13 @@ class nextcloud (
   $http_port                  = 80,
   $https_port                 = 443,
   $ssl                        = true,
-  $ssl_key_file               = '/etc/nginx/ssl/cert.key',
-  $ssl_cert_file              = '/etc/nginx/ssl/cert.crt',
+  $ssl_key_file               = undef,
+  $ssl_cert_file              = undef,
 ) {
+
+  if $ssl and !($ssl_cert_file and $ssl_key_file) {
+    fail("You must provide certificate file and key file for SSL config.")
+  }
 
   include nextcloud::database
   include nextcloud::php

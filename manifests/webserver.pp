@@ -1,8 +1,10 @@
 class nextcloud::webserver (
-  $ssl          = $nextcloud::ssl,
-  $http_port    = $nextcloud::http_port,
-  $https_port   = $nextcloud::https_port,
-  $server_names = $nextcloud::server_names,
+  $ssl           = $nextcloud::ssl,
+  $ssl_key_file  = $nextcloud::ssl_key_file,
+  $ssl_cert_file = $nextcloud::ssl_cert_file,
+  $http_port     = $nextcloud::http_port,
+  $https_port    = $nextcloud::https_port,
+  $server_names  = $nextcloud::server_names,
 ) {
   if $ssl == true {
     $port = $https_port
@@ -26,9 +28,9 @@ class nextcloud::webserver (
   nginx::resource::server { 'nextcloud_server_main':
     ensure               => present,
     server_name          => ['nextcloud', 'nextcloud.int.othalland.xyz'],
-    ssl                  => true,
-    ssl_cert             => '/tmp/server.crt',
-    ssl_key              => '/tmp/server.key',
+    ssl                  => $ssl,
+    ssl_cert             => $ssl_cert_file,
+    ssl_key              => $ssl_key_file,
     listen_port          => $port,
     http2                => true,
     www_root             => '/var/www/html/nextcloud',
