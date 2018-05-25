@@ -42,6 +42,7 @@
 class nextcloud (
   $install_dir                = '/var/www/html/nextcloud',
   $data_directory             = '/www/htdocs/nextcloud/data',
+  $db_manage                  = true,
   $db_type                    = 'mysql',
   $db_name                    = 'nextcloud',
   $db_user                    = 'nextcloud',
@@ -58,19 +59,31 @@ class nextcloud (
   $ssl_cert_file              = undef,
 ) {
 
+  if !
+
   if $ssl and !($ssl_cert_file and $ssl_key_file) {
     fail("You must provide certificate file and key file for SSL config.")
   }
 
-  include nextcloud::database
-  include nextcloud::php
-  include nextcloud::install
-  include nextcloud::webserver
+  contain nextcloud::php
+  contain nextcloud::install
+  contain nextcloud::webserver
   include nextcloud::config
-  Class['nextcloud::database']
-  -> Class['nextcloud::php']
-  -> Class['nextcloud::install']
-  -> Class['nextcloud::webserver']
-  -> Class['nextcloud::config']
+
+  if $db_manage {
+    contain nextcloud::database
+
+    Class['nextcloud::database']
+    -> Class['nextcloud::php']
+    -> Class['nextcloud::install']
+    -> Class['nextcloud::webserver']
+    -> Class['nextcloud::config']
+  } else {
+    -> Class['nextcloud::php']
+    -> Class['nextcloud::install']
+    -> Class['nextcloud::webserver']
+    -> Class['nextcloud::config']
+  }
+
 
 }
