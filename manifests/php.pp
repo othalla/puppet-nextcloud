@@ -20,7 +20,7 @@ class nextcloud::php (
   class { 'phpfpm':
     process_max  => 20,
     package_name => "php${php_version}-fpm",
-    poold_purge => true,
+    poold_purge  => true,
   }
   -> phpfpm::pool { 'nextcloud':
     listen => "/run/php/php${php_version}-fpm.sock",

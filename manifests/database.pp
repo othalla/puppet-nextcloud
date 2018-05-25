@@ -10,7 +10,7 @@ class nextcloud::database (
     service_name     => 'mariadb',
     root_password    => 'rootpassword',
     override_options => {
-      mysqld => {
+      mysqld      => {
         'log-error' => '/var/log/mysql/mariadb.log',
         'pid-file'  => '/var/run/mysqld/mysqld.pid',
       },

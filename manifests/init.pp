@@ -61,7 +61,7 @@ class nextcloud (
 ) {
 
   if $ssl and !($ssl_cert_file and $ssl_key_file) {
-    fail("You must provide certificate file and key file for SSL config.")
+    fail('You must provide certificate file and key file for SSL config.')
   }
 
 

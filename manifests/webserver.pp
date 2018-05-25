@@ -53,44 +53,44 @@ class nextcloud::webserver (
       'gzip_types'      => 'plication/atom+xml application/javascript application/json application/ld+json application/manifest+json application/rss+xml application/vnd.geo+json application/vnd.ms-fontobject application/x-font-ttf application/x-web-app-manifest+json application/xhtml+xml application/xml font/opentype image/bmp image/svg+xml image/x-icon text/cache-manifest text/css text/plain text/vcard text/vnd.rim.location.xloc text/vtt text/x-component text/x-cross-domain-policy',
     },
   }
-  nginx::resource::location { "root":
+  nginx::resource::location { 'root':
     ensure        => present,
     ssl           => true,
     ssl_only      => true,
     index_files   => [],
-    server        => "nextcloud_server_main",
+    server        => 'nextcloud_server_main',
     location      => '/',
     rewrite_rules => ['^ /index.php$uri'],
     priority      => 401,
   }
-  -> nginx::resource::location { "misc":
-    ensure              => present,
-    ssl                 => true,
-    ssl_only            => true,
-    index_files         => [],
-    server              => "nextcloud_server_main",
-    location            => '~ ^/(?:build|tests|config|lib|3rdparty|templates|data)/',
-    location_deny       => ['all'],
-    priority            => 402,
+  -> nginx::resource::location { 'misc':
+    ensure        => present,
+    ssl           => true,
+    ssl_only      => true,
+    index_files   => [],
+    server        => 'nextcloud_server_main',
+    location      => '~ ^/(?:build|tests|config|lib|3rdparty|templates|data)/',
+    location_deny => ['all'],
+    priority      => 402,
   }
-  -> nginx::resource::location { "internal":
-    ensure              => present,
-    ssl                 => true,
-    ssl_only            => true,
-    index_files         => [],
-    server              => "nextcloud_server_main",
-    location            => '~ ^/(?:\.|autotest|occ|issue|indie|db_|console)',
-    location_deny       => ['all'],
-    priority            => 403,
+  -> nginx::resource::location { 'internal':
+    ensure        => present,
+    ssl           => true,
+    ssl_only      => true,
+    index_files   => [],
+    server        => 'nextcloud_server_main',
+    location      => '~ ^/(?:\.|autotest|occ|issue|indie|db_|console)',
+    location_deny => ['all'],
+    priority      => 403,
   }
-  -> nginx::resource::location { "nextcloud":
-    ensure              => present,
-    ssl                 => true,
-    ssl_only            => true,
-    index_files         => [],
-    server              => "nextcloud_server_main",
-    location            => '~ ^/(?:index|remote|public|cron|core/ajax/update|status|ocs/v[12]|updater/.+|ocs-provider/.+)\.php(?:$|/)',
-    raw_append          => [
+  -> nginx::resource::location { 'nextcloud':
+    ensure      => present,
+    ssl         => true,
+    ssl_only    => true,
+    index_files => [],
+    server      => 'nextcloud_server_main',
+    location    => '~ ^/(?:index|remote|public|cron|core/ajax/update|status|ocs/v[12]|updater/.+|ocs-provider/.+)\.php(?:$|/)',
+    raw_append  => [
       'fastcgi_split_path_info ^(.+\.php)(/.*)$;',
       'include fastcgi_params;',
       'fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;',
@@ -102,24 +102,24 @@ class nextcloud::webserver (
       'fastcgi_intercept_errors on;',
       'fastcgi_request_buffering off;',
     ],
-    priority            => 404,
+    priority    => 404,
   }
-  -> nginx::resource::location { "updater":
+  -> nginx::resource::location { 'updater':
     ensure      => present,
     ssl         => true,
     ssl_only    => true,
     index_files => ['index.php'],
-    server      => "nextcloud_server_main",
+    server      => 'nextcloud_server_main',
     location    => '~ ^/(?:updater|ocs-provider)(?:$|/)',
     try_files   => ['$uri/ =404'],
     priority    => 405,
   }
-  -> nginx::resource::location { "css_js":
+  -> nginx::resource::location { 'css_js':
     ensure              => present,
     ssl                 => true,
     ssl_only            => true,
     index_files         => ['index.php'],
-    server              => "nextcloud_server_main",
+    server              => 'nextcloud_server_main',
     location            => '~ \.(?:css|js|woff|svg|gif)$',
     try_files           => ['$uri', '/index.php$uri$is_args$args'],
     add_header          => {
@@ -133,12 +133,12 @@ class nextcloud::webserver (
     location_cfg_append => { 'access_log' => 'off' },
     priority            => 406,
   }
-  -> nginx::resource::location { "static_media_pictures":
+  -> nginx::resource::location { 'static_media_pictures':
     ensure              => present,
     ssl                 => true,
     ssl_only            => true,
     index_files         => ['index.php'],
-    server              => "nextcloud_server_main",
+    server              => 'nextcloud_server_main',
     location            => '~ \.(?:png|html|ttf|ico|jpg|jpeg)$',
     try_files           => ['$uri', '/index.php$uri$is_args$args'],
     location_cfg_append => { 'access_log' => 'off' },
