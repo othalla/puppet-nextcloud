@@ -1,7 +1,7 @@
 # Class: nextcloud
 # ===========================
 #
-# Full description of class nextcloud here.
+# Class to install nextcloud server.
 #
 # Parameters
 # ----------
@@ -29,18 +29,15 @@
 #
 # @example
 #    class { 'nextcloud':
-#      servers => [ 'pool.ntp.org', 'ntp.local.company.com' ],
+#      ssl_key_file  => '/etc/nginx/ssl/server.key',
+#      ssl_cert_file => '/etc/nginx/ssl/server.crt',
 #    }
 #
 # Authors
 # -------
 #
-# Author Name <author@domain.com>
+# Othalla <othalla.lf@gmail.com>
 #
-# Copyright
-# ---------
-#
-# Copyright 2018 Your name here, unless otherwise noted.
 #
 class nextcloud (
   $install_dir                = '/var/www/html/nextcloud',
