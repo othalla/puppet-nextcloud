@@ -1,27 +1,29 @@
-class nextcloud::php {
+class nextcloud::php (
+  $php_version = $nextcloud::php_version,
+) {
 
   $php_extensions = [
-    'php7.0-mbstring',
-    'php7.0-xmlrpc',
-    'php7.0-soap',
-    'php7.0-ldap',
-    'php7.0-gd',
-    'php7.0-xml',
-    'php7.0-intl',
-    'php7.0-json',
-    'php7.0-mysql',
-    'php7.0-cli',
-    'php7.0-mcrypt',
-    'php7.0-curl',
-    'php7.0-zip'
+    "php${php_version}-mbstring",
+    "php${php_version}-xmlrpc",
+    "php${php_version}-soap",
+    "php${php_version}-ldap",
+    "php${php_version}-gd",
+    "php${php_version}-xml",
+    "php${php_version}-intl",
+    "php${php_version}-json",
+    "php${php_version}-mysql",
+    "php${php_version}-cli",
+    "php${php_version}-mcrypt",
+    "php${php_version}-curl",
+    "php${php_version}-zip"
   ]
   class { 'phpfpm':
     process_max  => 20,
-    package_name => 'php7.0-fpm',
+    package_name => "php${php_version}-fpm",
     poold_purge => true,
   }
   -> phpfpm::pool { 'nextcloud':
-    listen => '/run/php/php7.0-fpm.sock',
+    listen => "/run/php/php${php_version}-fpm.sock",
   }
   -> package { $php_extensions:
     ensure => present,

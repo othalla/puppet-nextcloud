@@ -57,6 +57,7 @@ class nextcloud (
   $ssl                        = true,
   $ssl_key_file               = undef,
   $ssl_cert_file              = undef,
+  $php_version                = '7.0'
 ) {
 
   if !

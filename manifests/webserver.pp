@@ -5,6 +5,7 @@ class nextcloud::webserver (
   $http_port     = $nextcloud::http_port,
   $https_port    = $nextcloud::https_port,
   $server_names  = $nextcloud::server_names,
+  $php_version   = $nextcloud::php_version,
 ) {
   if $ssl == true {
     $port = $https_port
@@ -145,7 +146,7 @@ class nextcloud::webserver (
   }
   nginx::resource::upstream { 'php-handler':
     members => [
-      'unix:/run/php/php7.0-fpm.sock',
+      "unix:/run/php/php${php_version}fpm.sock",
     ],
   }
 }
