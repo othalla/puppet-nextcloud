@@ -146,7 +146,7 @@ class nextcloud::webserver (
   }
   nginx::resource::upstream { 'php-handler':
     members => [
-      "unix:/run/php/php${php_version}fpm.sock",
+      "unix:/run/php/php${php_version}-fpm.sock",
     ],
   }
 }
