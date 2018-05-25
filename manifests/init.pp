@@ -53,15 +53,19 @@ class nextcloud (
   $db_table_prefix = undef,
   $admin_user      = 'root',
   $admin_password  = 'password',
+  $ssl_file_key    = '/etc/nginx/ssl/cert.key',
+  $ssl_file_cert   = '/etc/nginx/ssl/cert.crt',
 ) {
 
   include nextcloud::database
   include nextcloud::php
   include nextcloud::install
   include nextcloud::webserver
+  include nextcloud::config
   Class['nextcloud::database']
   -> Class['nextcloud::php']
   -> Class['nextcloud::install']
   -> Class['nextcloud::webserver']
+  -> Class['nextcloud::config']
 
 }
