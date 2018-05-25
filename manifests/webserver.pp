@@ -39,13 +39,14 @@ class nextcloud::webserver {
     },
   }
   nginx::resource::location { "root":
-    ensure              => present,
-    ssl                 => true,
-    ssl_only            => true,
-    index_files         => [],
-    server              => "nextcloud_server_https",
-    location            => '/',
-    rewrite_rules       => ['^ /index.php$uri'],
+    ensure        => present,
+    ssl           => true,
+    ssl_only      => true,
+    index_files   => [],
+    server        => "nextcloud_server_https",
+    location      => '/',
+    rewrite_rules => ['^ /index.php$uri'],
+    priority      => 401,
   }
   -> nginx::resource::location { "misc":
     ensure              => present,
@@ -55,6 +56,7 @@ class nextcloud::webserver {
     server              => "nextcloud_server_https",
     location            => '~ ^/(?:build|tests|config|lib|3rdparty|templates|data)/',
     location_deny       => ['all'],
+    priority      => 402,
   }
   -> nginx::resource::location { "internal":
     ensure              => present,
@@ -64,6 +66,7 @@ class nextcloud::webserver {
     server              => "nextcloud_server_https",
     location            => '~ ^/(?:\.|autotest|occ|issue|indie|db_|console)',
     location_deny       => ['all'],
+    priority      => 403,
   }
   -> nginx::resource::location { "nextcloud":
     ensure              => present,
@@ -84,6 +87,7 @@ class nextcloud::webserver {
       'fastcgi_intercept_errors on;',
       'fastcgi_request_buffering off;',
     ],
+    priority      => 404,
   }
   -> nginx::resource::location { "updater":
     ensure              => present,
@@ -93,6 +97,7 @@ class nextcloud::webserver {
     server              => "nextcloud_server_https",
     location            => '~ ^/(?:updater|ocs-provider)(?:$|/)',
     try_files           => ['$uri/ =404'],
+    priority      => 405,
   }
   -> nginx::resource::location { "css_js":
     ensure              => present,
@@ -111,6 +116,7 @@ class nextcloud::webserver {
       'X-Permitted-Cross-Domain-Policies' => 'none',
     },
     location_cfg_append => { 'access_log' => 'off' },
+    priority      => 406,
   }
   -> nginx::resource::location { "static_media_pictures":
     ensure              => present,
@@ -121,6 +127,7 @@ class nextcloud::webserver {
     location            => '~ \.(?:png|html|ttf|ico|jpg|jpeg)$',
     try_files           => ['$uri', '/index.php$uri$is_args$args'],
     location_cfg_append => { 'access_log' => 'off' },
+    priority      => 407,
   }
   nginx::resource::upstream { 'php-handler':
     members => [
