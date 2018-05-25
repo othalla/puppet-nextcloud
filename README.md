@@ -60,10 +60,10 @@ You can provide your own DB if you already for some :
 class { '::nextcloud':
   ssl_key_file  => '/etc/nginx/ssl/server.key',
   ssl_cert_file => '/etc/nginx/ssl/server.crt',
-  $db_manage    => false,
-  $db_host      => 'myhost',
-  $db_user      => 'myuser',
-  $db_password  => 'mypassword',
+  db_manage     => false,
+  db_host       => 'myhost',
+  db_user       => 'myuser',
+  db_password   => 'mypassword',
 }
 ```
 
