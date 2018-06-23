@@ -1,6 +1,6 @@
 {
   "name": "othalla-nextcloud",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "author": "othalla",
   "summary": "Module to setup Netxcloud",
   "license": "Apache-2.0",
@@ -11,7 +11,8 @@
     {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"},
     {"name":"puppetlabs-mysql","version_requirement":">= 5.0.0"},
     {"name":"Slashbunny-phpfpm","version_requirement":">= 0.0.16"},
-    {"name":"puppet-nginx","version_requirement":">= 0.12.0"}
+    {"name":"puppet-nginx","version_requirement":">= 0.12.0"},
+    {"name":"puppet-archive","version_requirement":">= 3.0.0"}
   ],
   "operatingsystem_support": [
     {
