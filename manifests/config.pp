@@ -4,7 +4,7 @@ class nextcloud::config (
   $db_type         = $nextcloud::db_type,
   $db_name         = $nextcloud::db_name,
   $db_user         = $nextcloud::db_user,
-  $db_poassword    = $nextcloud::db_password,
+  $db_password     = $nextcloud::db_password,
   $db_host         = $nextcloud::db_host,
   $db_table_prefix = $nextcloud::db_table_prefix,
   $admin_user      = $nextcloud::admin_user,
