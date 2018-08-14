@@ -41,7 +41,7 @@
 #
 class nextcloud (
   $install_dir                = '/var/www/html/nextcloud',
-  $data_directory             = '/www/htdocs/nextcloud/data',
+  $data_directory             = '/var/www/html/nextcloud/data',
   $db_manage                  = true,
   $db_type                    = 'mysql',
   $db_name                    = 'nextcloud',
