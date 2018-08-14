@@ -1,8 +1,9 @@
 class nextcloud::database (
-  $db_type = $nextcloud::db_type,
-  $db_name = $nextcloud::db_name,
-  $db_user = $nextcloud::db_user,
-  $db_host = $nextcloud::db_host,
+  $db_type     = $nextcloud::db_type,
+  $db_name     = $nextcloud::db_name,
+  $db_user     = $nextcloud::db_user,
+  $db_password = $nextcloud::db_password,
+  $db_host     = $nextcloud::db_host,
 ) {
 
   class {'::mysql::server':
@@ -21,7 +22,7 @@ class nextcloud::database (
   }
   mysql::db { $db_name:
     user     => $db_user,
-    password => $db_type,
+    password => $db_password,
     host     => $db_host,
     grant    => ['ALL'],
   }
