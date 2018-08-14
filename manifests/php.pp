@@ -23,7 +23,8 @@ class nextcloud::php (
     poold_purge  => true,
   }
   -> phpfpm::pool { 'nextcloud':
-    listen => "/run/php/php${php_version}-fpm.sock",
+    listen       => "/run/php/php${php_version}-fpm.sock",
+    listen_owner => "www-data",
   }
   -> package { $php_extensions:
     ensure => present,
