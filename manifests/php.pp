@@ -24,7 +24,7 @@ class nextcloud::php (
   }
   -> phpfpm::pool { 'nextcloud':
     listen       => "/run/php/php${php_version}-fpm.sock",
-    listen_owner => "www-data",
+    listen_owner => 'www-data',
   }
   -> package { $php_extensions:
     ensure => present,
