@@ -40,24 +40,24 @@
 #
 #
 class nextcloud (
-  $install_dir                = '/var/www/html/nextcloud',
-  $data_directory             = '/var/www/html/nextcloud/data',
-  $db_manage                  = true,
-  $db_type                    = 'mysql',
-  $db_name                    = 'nextcloud',
-  $db_user                    = 'nextcloud',
-  $db_password                = 'nextcloud',
-  $db_host                    = 'localhost',
-  $db_table_prefix            = undef,
-  $admin_user                 = undef,
-  $admin_password             = undef,
-  Array[String] $server_names = ['localhost'],
-  $http_port                  = 80,
-  $https_port                 = 443,
-  $ssl                        = true,
-  $ssl_key_file               = undef,
-  $ssl_cert_file              = undef,
-  $php_version                = '7.0'
+  Stdlib::Absolutepath $install_dir                   = '/var/www/html/nextcloud',
+  Stdlib::Absolutepath $data_directory                = '/var/www/html/nextcloud/data',
+  Boolean $db_manage                                  = true,
+  String $db_type                                     = 'mysql',
+  String $db_name                                     = 'nextcloud',
+  String $db_user                                     = 'nextcloud',
+  String $db_password                                 = 'nextcloud',
+  String $db_host                                     = 'localhost',
+  Variant[Undef, String] $db_table_prefix             = undef,
+  Variant[Undef, String] $admin_user                  = undef,
+  Variant[Undef, String] $admin_password              = undef,
+  Array[String] $server_names                         = ['localhost'],
+  Integer $http_port                                  = 80,
+  Integer $https_port                                 = 443,
+  Boolean $ssl                                        = true,
+  Variant[Undef, Stdlib::Absolutepath] $ssl_key_file  = undef,
+  Variant[Undef, Stdlib::Absolutepath] $ssl_cert_file = undef,
+  String $php_version                                 = '7.0'
 ) {
 
   if $ssl and !($ssl_cert_file and $ssl_key_file) {
