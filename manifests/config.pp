@@ -12,10 +12,11 @@ class nextcloud::config (
 ) {
 
   file { "${install_dir}/config/autoconfig.php":
-    ensure  => present,
-    owner   => 'www-data',
-    group   => 'www-data',
-    mode    => '0640',
-    content => template('nextcloud/autoconfig.php.erb'),
+    ensure    => present,
+    owner     => 'www-data',
+    group     => 'www-data',
+    mode      => '0640',
+    show_diff => false,
+    content   => template('nextcloud/autoconfig.php.erb'),
   }
 }
