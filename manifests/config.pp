@@ -1,6 +1,6 @@
 class nextcloud::config (
   $install_dir     = $nextcloud::install_dir,
-  $data_directory  = $nextcloud::db_user,
+  $data_directory  = $nextcloud::data_directory,
   $db_type         = $nextcloud::db_type,
   $db_name         = $nextcloud::db_name,
   $db_user         = $nextcloud::db_user,
