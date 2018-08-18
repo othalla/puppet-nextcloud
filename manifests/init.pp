@@ -57,7 +57,8 @@ class nextcloud (
   Boolean $ssl                                        = true,
   Variant[Undef, Stdlib::Absolutepath] $ssl_key_file  = undef,
   Variant[Undef, Stdlib::Absolutepath] $ssl_cert_file = undef,
-  String $php_version                                 = '7.0'
+  String $php_version                                 = '7.0',
+  Integer $worker_processes                           = 2,
 ) {
 
   if $ssl and !($ssl_cert_file and $ssl_key_file) {

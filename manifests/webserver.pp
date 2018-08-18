@@ -1,11 +1,12 @@
 class nextcloud::webserver (
-  $ssl           = $nextcloud::ssl,
-  $ssl_key_file  = $nextcloud::ssl_key_file,
-  $ssl_cert_file = $nextcloud::ssl_cert_file,
-  $http_port     = $nextcloud::http_port,
-  $https_port    = $nextcloud::https_port,
-  $server_names  = $nextcloud::server_names,
-  $php_version   = $nextcloud::php_version,
+  $ssl              = $nextcloud::ssl,
+  $ssl_key_file     = $nextcloud::ssl_key_file,
+  $ssl_cert_file    = $nextcloud::ssl_cert_file,
+  $http_port        = $nextcloud::http_port,
+  $https_port       = $nextcloud::https_port,
+  $server_names     = $nextcloud::server_names,
+  $php_version      = $nextcloud::php_version,
+  $worker_processes = $nextcloud::worker_processes,
 ) {
   if $ssl == true {
     $port = $https_port
@@ -14,7 +15,8 @@ class nextcloud::webserver (
   }
 
   class { 'nginx':
-    manage_repo    => false,
+    manage_repo      => false,
+    worker_processes => $worker_processes,
   }
   if $ssl {
     nginx::resource::server { 'nextcloud_server_redirect':
