@@ -51,6 +51,7 @@ class nextcloud (
   Variant[Undef, String] $db_table_prefix             = undef,
   Variant[Undef, String] $admin_user                  = undef,
   Variant[Undef, String] $admin_password              = undef,
+  String $db_root_password                            = 'defaultpassword',
   Array[String] $server_names                         = ['localhost'],
   Integer $http_port                                  = 80,
   Integer $https_port                                 = 443,
