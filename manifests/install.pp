@@ -5,12 +5,12 @@ class nextcloud::install {
     owner  => 'www-data',
     group  => 'www-data',
   }
-  -> archive { '/var/www/html/nextcloud-13.0.4.tar.bz2':
+  -> archive { '/var/www/html/nextcloud-13.0.7.tar.bz2':
     ensure       => present,
-    path         => '/tmp/nextcloud-13.0.4.tar.bz2',
+    path         => '/tmp/nextcloud-13.0.7.tar.bz2',
     extract      => true,
     extract_path => '/var/www/html',
-    source       => 'https://download.nextcloud.com/server/releases/nextcloud-13.0.6.tar.bz2',
+    source       => 'https://download.nextcloud.com/server/releases/nextcloud-13.0.7.tar.bz2',
     creates      => '/var/www/html/nextcloud/index.php',
     cleanup      => true,
     user         => 'www-data',
