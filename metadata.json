@@ -2,7 +2,7 @@
   "name": "othalla-nextcloud",
   "version": "0.3.6",
   "author": "othalla",
-  "summary": "Module to setup Netxcloud",
+  "summary": "Module to setup Netxcloud server",
   "license": "Apache-2.0",
   "source": "https://github.com/othalla/puppet-nextcloud.git",
   "project_page": "https://github.com/othalla/puppet-nextcloud",
