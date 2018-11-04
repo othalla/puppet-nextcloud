@@ -1,0 +1,10 @@
+fixtures:
+  repositories:
+    stdlib: 'git://github.com/puppetlabs/puppetlabs-stdlib.git'
+    concat: 'git://github.com/puppetlabs/puppetlabs-concat.git'
+    mysql: 'git://github.com/puppetlabs/puppetlabs-mysql.git'
+    nginx: 'git://github.com/voxpupuli/puppet-archive.git'
+    archive: 'git://github.com/voxpupuli/puppet-nginx.git'
+    phpfpm: 'git://github.com/Slashbunny/puppet-phpfpm.git'
+  symlinks:
+    puppetdb: '#{source_dir}'
