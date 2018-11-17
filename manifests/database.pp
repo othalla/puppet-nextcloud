@@ -15,6 +15,7 @@ class nextcloud::database (
       mysqld      => {
         'log-error' => '/var/log/mysql/mariadb.log',
         'pid-file'  => '/var/run/mysqld/mysqld.pid',
+        'plugin-load-add'  => 'auth_socket.so',
       },
       mysqld_safe => {
         'log-error' => '/var/log/mysql/mariadb.log',
