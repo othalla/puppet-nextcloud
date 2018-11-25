@@ -7,18 +7,17 @@ describe 'nextcloud' do
         facts
       end
 
-      let :params do
-        {
-          ssl: false,
-        }
-      end
-      let(:facts) do
-        facts.merge({
-          root_home: '/root',
-        })
-      end
-
-      describe 'with default' do
+      describe 'without ssl' do
+        let(:facts) do
+          facts.merge(
+            root_home: '/root',
+          )
+        end
+        let :params do
+          {
+            ssl: false,
+          }
+        end
 
         it { is_expected.to compile.with_all_deps }
         it { is_expected.to contain_class('nextcloud::database') }
