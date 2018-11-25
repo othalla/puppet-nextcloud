@@ -4,7 +4,7 @@ fixtures:
     concat: 'git://github.com/puppetlabs/puppetlabs-concat.git'
     mysql: 'git://github.com/puppetlabs/puppetlabs-mysql.git'
     nginx: 'git://github.com/voxpupuli/puppet-nginx.git'
-    archive: 'git://github.com/voxpupuli/puppet-nginx.git'
+    archive: 'git://github.com/voxpupuli/puppet-archive.git'
     phpfpm: 'git://github.com/Slashbunny/puppet-phpfpm.git'
   symlinks:
     puppetdb: '#{source_dir}'
