@@ -35,7 +35,7 @@ class nextcloud::webserver (
     ssl_cert             => $ssl_cert_file,
     ssl_key              => $ssl_key_file,
     listen_port          => $port,
-    http2                => true,
+    http2                => 'on',
     www_root             => '/var/www/html/nextcloud',
     client_max_body_size => '512M',
     use_default_location => false,
@@ -101,6 +101,7 @@ class nextcloud::webserver (
       'fastcgi_param modHeadersAvailable true;',
       'fastcgi_param front_controller_active true;',
       'fastcgi_pass php-handler;',
+      "fastcgi_pass unix:/run/php/php${php_version}-fpm.sock;",
       'fastcgi_intercept_errors on;',
       'fastcgi_request_buffering off;',
     ],
@@ -145,10 +146,5 @@ class nextcloud::webserver (
     try_files           => ['$uri', '/index.php$uri$is_args$args'],
     location_cfg_append => { 'access_log' => 'off' },
     priority            => 407,
-  }
-  nginx::resource::upstream { 'php-handler':
-    members => [
-      "unix:/run/php/php${php_version}-fpm.sock",
-    ],
   }
 }
