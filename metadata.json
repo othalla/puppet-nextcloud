@@ -1,6 +1,6 @@
 {
   "name": "othalla-nextcloud",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "author": "othalla",
   "summary": "Module to setup Netxcloud server",
   "license": "Apache-2.0",
