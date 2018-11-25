@@ -20,6 +20,7 @@ describe 'nextcloud' do
 
       describe 'with default' do
 
+        it { is_expected.to compile.with_all_deps }
         it { is_expected.to contain_class('nextcloud::database') }
       end
     end
