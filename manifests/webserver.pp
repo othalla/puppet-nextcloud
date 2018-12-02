@@ -18,16 +18,6 @@ class nextcloud::webserver (
     manage_repo      => false,
     worker_processes => $worker_processes,
   }
-  if $ssl {
-    nginx::resource::server { 'nextcloud_server_redirect':
-      ensure               => present,
-      server_name          => $server_names,
-      listen_port          => $http_port,
-      ssl_redirect         => true,
-      ssl_redirect_port    => $https_port,
-      use_default_location => false,
-    }
-  }
   nginx::resource::server { 'nextcloud_server_main':
     ensure               => present,
     server_name          => ['nextcloud', 'nextcloud.int.othalland.xyz'],
