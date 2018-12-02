@@ -21,6 +21,26 @@ describe 'nextcloud' do
         it { is_expected.to contain_class('nextcloud::webserver') }
         it { is_expected.to contain_class('nextcloud::config') }
       end
+
+      describe 'with db_managed false' do
+        let(:facts) do
+          facts.merge(
+            root_home: '/root',
+          )
+        end
+
+        let :params do
+          {
+            db_managed: false,
+          }
+        end
+
+        it { is_expected.to compile.with_all_deps }
+        it { is_expected.to contain_class('nextcloud::php') }
+        it { is_expected.to contain_class('nextcloud::install') }
+        it { is_expected.to contain_class('nextcloud::webserver') }
+        it { is_expected.to contain_class('nextcloud::config') }
+      end
     end
   end
 end
