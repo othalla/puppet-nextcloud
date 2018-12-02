@@ -41,6 +41,23 @@ describe 'nextcloud' do
         it { is_expected.to contain_class('nextcloud::webserver') }
         it { is_expected.to contain_class('nextcloud::config') }
       end
+
+      describe 'with ssl true' do
+        let(:facts) do
+          facts.merge(
+            root_home: '/root',
+          )
+        end
+        context 'should fail without ssl_cert_file and ssl_key_file' do
+          let :params do
+            {
+              ssl: true,
+            }
+          end
+
+          it { is_expected.to compile.and_raise_error(/You must provide certificate/) }
+        end
+      end
     end
   end
 end
