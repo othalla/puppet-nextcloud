@@ -55,7 +55,7 @@ class nextcloud (
   Array[String] $server_names                         = ['localhost'],
   Integer $http_port                                  = 80,
   Integer $https_port                                 = 443,
-  Boolean $ssl                                        = true,
+  Boolean $ssl                                        = false,
   Variant[Undef, Stdlib::Absolutepath] $ssl_key_file  = undef,
   Variant[Undef, Stdlib::Absolutepath] $ssl_cert_file = undef,
   String $php_version                                 = '7.0',
