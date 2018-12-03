@@ -48,6 +48,7 @@ describe 'nextcloud' do
             root_home: '/root',
           )
         end
+
         context 'should fail without ssl_cert_file and ssl_key_file' do
           let :params do
             {
@@ -55,7 +56,18 @@ describe 'nextcloud' do
             }
           end
 
-          it { is_expected.to compile.and_raise_error(/You must provide certificate/) }
+          it { is_expected.to compile.and_raise_error(%r{You must provide certificate}) }
+        end
+        context 'with certificates' do
+          let :params do
+            {
+              ssl: true,
+              ssl_key_file:  '/path/to/ssl_key_file',
+              ssl_cert_file: '/path/to/ssl_cert_file',
+            }
+          end
+
+          it { is_expected.to compile.with_all_deps }
         end
       end
     end
