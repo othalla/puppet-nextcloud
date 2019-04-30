@@ -8,7 +8,6 @@
 1. [Setup - The basics of getting started with nextcloud](#setup)
     * [What nextcloud affects](#what-nextcloud-affects)
     * [Setup requirements](#setup-requirements)
-    * [Beginning with nextcloud](#beginning-with-nextcloud)
 1. [Usage - Configuration options and additional functionality](#usage)
 1. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
 1. [Limitations - OS compatibility, etc.](#limitations)
@@ -34,10 +33,6 @@ Depending of given parameters, nextcloud class does:
 ### Setup Requirements
 
 If SSL choosed, you must provide and put ssl cert & key on nextcloud host.
-
-### Beginning with nextcloud
-
-None
 
 ## Usage
 
